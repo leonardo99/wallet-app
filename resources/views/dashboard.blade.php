@@ -14,7 +14,7 @@
                 <p class="pl-6 pb-6 text-gray-900 font-bold">
                     R$ 0,00
                 </p>
-                <div class="mx-6 my-4 flex gap-x-2">
+                <div class="mx-6 my-4 flex justify-between sm:justify-start sm:gap-x-2">
                     <a class="p-2 bg-blue-100 hover:bg-blue-200 focus:bg-blue-200 active:bg-blue-200 text-sm text-blue-500 rounded-sm cursor-pointer flex items-center gap-1"><x-bi-arrow-up-circle /> Depositar dinheiro</a>
                     <a class="p-2 bg-blue-100 hover:bg-blue-200 focus:bg-blue-200 active:bg-blue-200 text-sm text-blue-500 rounded-sm cursor-pointer flex items-center gap-1"><x-bi-arrow-down-circle /> Transferir dinheiro</a>
                 </div>
