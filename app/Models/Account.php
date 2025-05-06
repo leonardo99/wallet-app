@@ -28,4 +28,14 @@ class Account extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function sentTransactions()
+    {
+        return $this->hasMany(Transaction::class, 'sender_account_id');
+    }
+
+    public function receivedTransactions()
+    {
+        return $this->hasMany(Transaction::class, 'receiver_account_id');
+    }
 }

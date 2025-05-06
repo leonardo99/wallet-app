@@ -23,4 +23,14 @@ class Transaction extends Model
             }
         });
     }
+
+    public function senderAccount()
+    {
+        return $this->belongsTo(Account::class, 'sender_account_id');
+    }
+    
+    public function receiverAccount()
+    {
+        return $this->belongsTo(Account::class, 'receiver_account_id');
+    }
 }
