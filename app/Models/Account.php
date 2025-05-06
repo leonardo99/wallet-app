@@ -13,6 +13,8 @@ class Account extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
+    protected $fillable = ['user_id', 'balance'];
+
     protected static function boot()
     {
         parent::boot();
