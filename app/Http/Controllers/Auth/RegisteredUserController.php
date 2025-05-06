@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Actions\GenerateAccount;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -43,6 +44,8 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
+
+        GenerateAccount::run($user);
 
         Auth::login($user);
 
