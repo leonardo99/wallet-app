@@ -15,7 +15,10 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('sender_account_id')->constrained('accounts')->onDelete('cascade');
             $table->foreignUuid('receiver_account_id')->constrained('accounts')->onDelete('cascade');
+            $table->foreignUuid('reversed_transaction_id')->nullable()->constrained('transactions')->nullOnDelete();
             $table->decimal('amount', 15, 2);
+            $table->string('type');
+            $table->string('status')->default('pending');
             $table->timestamps();
             $table->softDeletes();
         });

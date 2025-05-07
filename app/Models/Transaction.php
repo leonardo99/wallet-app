@@ -13,7 +13,7 @@ class Transaction extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
-    protected $fillable = ['sender_account_id', 'receiver_account_id', 'amount'];
+    protected $fillable = ['sender_account_id', 'receiver_account_id', 'reversed_transaction_id', 'amount', 'type', 'status'];
 
     protected static function boot()
     {
