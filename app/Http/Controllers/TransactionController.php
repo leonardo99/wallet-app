@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\GetTransaction;
 use App\Models\Transaction;
+use Exception;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -34,9 +36,14 @@ class TransactionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Transaction $transaction, $transactionId)
+    public function show(Transaction $transaction)
     {
-        return view('transaction.show');
+        try {
+            $transaction = GetTransaction::run($transaction);
+            return view('transaction.show', compact('transaction'));
+        } catch (Exception $e) {
+            return redirect()->route('dashboard')->with('error', $e->getMessage());
+        }
     }
 
     /**
