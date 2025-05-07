@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use NumberFormatter;
 
 class Account extends Model
 {
@@ -24,6 +25,12 @@ class Account extends Model
                 $model->{$model->getKeyName()} = (string) Str::uuid();
             }
         });
+    }
+
+    public function getBalance()
+    {
+        $formatCurrency = new NumberFormatter('pt_BR', NumberFormatter::CURRENCY);
+        return $formatCurrency->formatCurrency($this->balance, 'BRL');
     }
 
     public function user()
