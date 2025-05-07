@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -24,6 +25,11 @@ class Transaction extends Model
                 $model->{$model->getKeyName()} = (string) Str::uuid();
             }
         });
+    }
+
+    public function getDate()
+    {
+        return Carbon::parse($this->created_at)->translatedFormat('j \d\e F - H\hi');
     }
 
     public function senderAccount()
