@@ -45,7 +45,7 @@
         <script>
             var amountInput = document.getElementById('amount');
             var keyInput = document.getElementById('id');
-            var amountMaskOptions = {
+            var keyIdMaskOptions = {
                 mask: '********-****-****-****-************',
                 prepare: (str) => str.toLowerCase().replace(/[^a-f0-9]/g, ''),
                 blocks: {
@@ -55,7 +55,7 @@
                 }
             };
 
-            var keyIdMaskOptions = {
+            var amountMaskOptions = {
                 mask: Number,
                 scale: 2,
                 signed: false,
@@ -65,7 +65,7 @@
                 radix: ',',
                 mapToRadix: ['.']
             };
-            var keyMask = IMask(keyInput, amountMaskOptions);
+            var keyMask = IMask(keyInput, keyIdMaskOptions);
             var amountMask = IMask(amountInput, amountMaskOptions);
         </script>
     @endpush
