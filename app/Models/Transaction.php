@@ -13,6 +13,8 @@ class Transaction extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
+    protected $fillable = ['sender_account_id', 'receiver_account_id', 'amount'];
+
     protected static function boot()
     {
         parent::boot();
