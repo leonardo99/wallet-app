@@ -11,7 +11,7 @@
                 <div class="border-b border-b-gray-100 px-6 pb-6">
                     <p class="font-bold">Informe o destinatário da transferência</p>
                     <p class="font-thin text-sm">Digite a chave da pessoa que vai receber o valor.</p>
-                    <p class="font-bold text-sm mt-1">Saldo {{ $balance }}</p>
+                    <p class="font-bold text-sm mt-2">Saldo em carteira <span class="font-thin">{{ $balance }}</span></p>
                 </div>
                 <form action="{{route('transaction.withdraw.store')}}" method="post">
                     @csrf
