@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
         'prefix' => 'transaction', 
         'as' => 'transaction.'
     ], function () {
-        Route::get('{transctionId}/show', [TransactionController::class, 'show'])->name('show');
+        Route::get('{transaction}/show', [TransactionController::class, 'show'])->name('show');
         //Withdraws
         Route::group(['prefix' => 'withdraw'], function() {
             Route::get('/', [WithdrawController::class, 'create'])->name('withdraw.create');
