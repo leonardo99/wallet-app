@@ -26,4 +26,13 @@ class WithdrawRequest extends FormRequest
             'amount' => ['required' , 'numeric', 'regex:/^\d{1,13}(\.\d{1,2})?$/'], 
         ];
     }
+
+    public function prepareForValidation()
+    {
+        if($this->has('amount')) {
+            $this->merge([
+                'amount' => str_replace(['.', ','], ['', '.'], $this->amount)
+            ]);
+        }
+    }
 }
