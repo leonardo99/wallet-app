@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('sender_account_id')->constrained('accounts')->onDelete('cascade');
+            $table->foreignUuid('sender_account_id')->nullable()->constrained('accounts')->onDelete('cascade');
             $table->foreignUuid('receiver_account_id')->constrained('accounts')->onDelete('cascade');
             $table->foreignUuid('reversed_transaction_id')->nullable()->constrained('transactions')->nullOnDelete();
             $table->decimal('amount', 15, 2);
