@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
         'as' => 'transaction.'
     ], function () {
         Route::get('{transaction}/show', [TransactionController::class, 'show'])->name('show');
+        Route::post('{transaction}/refund', [TransactionController::class, 'refund'])->name('refund');
         //Withdraws
         Route::group(['prefix' => 'withdraw'], function() {
             Route::get('/', [WithdrawController::class, 'create'])->name('withdraw.create');
