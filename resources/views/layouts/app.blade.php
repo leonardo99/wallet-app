@@ -32,5 +32,7 @@
                 {{ $slot }}
             </main>
         </div>
+        <script src="https://unpkg.com/imask"></script>
+        @stack('js')
     </body>
 </html>

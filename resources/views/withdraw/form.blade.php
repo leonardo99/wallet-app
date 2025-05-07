@@ -41,5 +41,32 @@
             </div>
         </div>
     </div>
-    
+    @push('js')
+        <script>
+            var amountInput = document.getElementById('amount');
+            var keyInput = document.getElementById('id');
+            var amountMaskOptions = {
+                mask: '********-****-****-****-************',
+                prepare: (str) => str.toLowerCase().replace(/[^a-f0-9]/g, ''),
+                blocks: {
+                    '*': {
+                    mask: /^[a-f0-9]$/
+                    }
+                }
+            };
+
+            var keyIdMaskOptions = {
+                mask: Number,
+                scale: 2,
+                signed: false,
+                thousandsSeparator: '.',
+                padFractionalZeros: true,
+                normalizeZeros: true,
+                radix: ',',
+                mapToRadix: ['.']
+            };
+            var keyMask = IMask(keyInput, amountMaskOptions);
+            var amountMask = IMask(amountInput, amountMaskOptions);
+        </script>
+    @endpush
 </x-app-layout>
