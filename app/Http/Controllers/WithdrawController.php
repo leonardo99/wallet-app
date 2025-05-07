@@ -23,7 +23,7 @@ class WithdrawController extends Controller
     public function create()
     {
         $balance = auth()->user()->account->getBalance();
-        return view('withdraw.form', compact('balance'));
+        return view('transaction.withdraw.form', compact('balance'));
     }
 
     /**
