@@ -34,7 +34,7 @@ class WithdrawController extends Controller
         try {
             $sendMoney = Withdraw::run($request->validated());
             if($sendMoney) {
-                return redirect()->route('transaction.show', ['transctionId' => $sendMoney->id])->with('success', " Pronto! O valor foi transferido com sucesso.")->withInput();   
+                return redirect()->route('transaction.show', ['transaction' => $sendMoney])->with('success', " Pronto! O valor foi transferido com sucesso.")->withInput();   
             }
         } catch(Exception $e) {
             return redirect()->back()->with('error', $e->getMessage())->withInput();
