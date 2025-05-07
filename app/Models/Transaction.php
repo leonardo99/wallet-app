@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use NumberFormatter;
 
 class Transaction extends Model
 {
@@ -30,6 +31,34 @@ class Transaction extends Model
     public function getDate()
     {
         return Carbon::parse($this->created_at)->translatedFormat('j \d\e F - H\hi');
+    }
+
+    public function getAmount()
+    {
+        $accountUser = auth()->user()->account->id;
+        if($accountUser === $this->sender_account_id) {
+            return "- {$this->getAmountFormated()}";
+        }
+        if($accountUser === $this->receiver_account_id) {
+            return "+ {$this->getAmountFormated()}";
+        }
+    }
+
+    public function getStatusTransaction()
+    {
+        $accountUser = auth()->user()->account->id;
+        if($accountUser === $this->sender_account_id) {
+            return "enviada";
+        }
+        if($accountUser === $this->receiver_account_id) {
+            return "recebida";
+        }
+    }
+
+    public function getAmountFormated()
+    {
+        $formatCurrency = new NumberFormatter('pt_BR', NumberFormatter::CURRENCY);
+        return $formatCurrency->formatCurrency($this->amount, 'BRL');
     }
 
     public function senderAccount()
