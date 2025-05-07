@@ -22,16 +22,16 @@
                         @endif 
                     </p>
                     <p class="font-thin text-xl">
-                        Transferência {{ $transaction->getStatusTransaction() }}
+                        {{ $transaction->getStatusTransaction() }}
                     </p>
                 </div>
                 <p>
                     @if ($transaction->getStatusTransaction() === 'enviada')
                         {{ $transaction->receiverAccount->user->name }}
                     @elseif($transaction->getStatusTransaction() === 'recebida')
-                        {{ $transaction->senderAccount->user->name }}
+                        {{ $transaction->senderAccount->user?->name ?? '' }}
                     @elseif($transaction->getStatusTransaction() === 'devolvida')
-                        {{ $transaction->senderAccount->user->name }}
+                        {{ $transaction->senderAccount->user?->name ?? '' }}
                     @endif 
                 </p>
                 @can('update', $transaction)
@@ -47,6 +47,7 @@
     </div>
     @push('js')
         <script>
+            @can('update', $transaction)
             const transaction = @json($transaction);
             document.querySelector("#refund-value").addEventListener('click', () => {
                 Swal.fire({
@@ -73,6 +74,7 @@
                     }
                 });
             })
+            @endcan
         </script>
     @endpush
 </x-app-layout>
