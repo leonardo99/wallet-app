@@ -32,10 +32,12 @@ class WithdrawController extends Controller
     public function store(WithdrawRequest $request)
     {
         try {
-            Withdraw::run($request->validated());
+            $sendMoney = Withdraw::run($request->validated());
+            if($sendMoney) {
+                return redirect()->route('transaction.show', ['transctionId' => $sendMoney->id])->with('success', " Pronto! O valor foi transferido com sucesso.")->withInput();   
+            }
         } catch(Exception $e) {
-            dd($e->getMessage());
-            return redirect()->back()->withInput();
+            return redirect()->back()->with('error', $e->getMessage())->withInput();
         }
     }
 
