@@ -47,16 +47,19 @@ class Transaction extends Model
     public function getStatusTransaction()
     {
         $accountUser = auth()->user()->account->id;
+        if($this->status === 'refunded') {
+            return "Transferência devolvida";
+        }
         if($this->status === 'completed') {
+            if($this->type === 'deposit') {
+                return "Depósito recebido";
+            }
             if($accountUser === $this->sender_account_id) {
-                return "enviada";
+                return "Transferência enviada";
             }
             if($accountUser === $this->receiver_account_id) {
-                return "recebida";
+                return "Transferência recebida";
             }
-        }
-        if($this->status === 'refunded') {
-            return "devolvida";
         }
     }
 
