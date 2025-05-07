@@ -15,7 +15,7 @@
                     {{ $balance->getBalance() }}
                 </p>
                 <div class="mx-6 my-4 flex justify-between sm:justify-start sm:gap-x-2">
-                    <a class="p-2 bg-blue-100 hover:bg-blue-200 focus:bg-blue-200 active:bg-blue-200 text-sm text-blue-500 rounded-sm cursor-pointer flex items-center gap-1"><x-bi-arrow-up-circle /> Depositar dinheiro</a>
+                    <a href="{{route('transaction.deposit.create')}}" class="p-2 bg-blue-100 hover:bg-blue-200 focus:bg-blue-200 active:bg-blue-200 text-sm text-blue-500 rounded-sm cursor-pointer flex items-center gap-1"><x-bi-arrow-up-circle /> Depositar dinheiro</a>
                     <a href="{{route('transaction.withdraw.create')}}" class="p-2 bg-blue-100 hover:bg-blue-200 focus:bg-blue-200 active:bg-blue-200 text-sm text-blue-500 rounded-sm cursor-pointer flex items-center gap-1"><x-bi-arrow-down-circle /> Transferir dinheiro</a>
                 </div>
             </div>
