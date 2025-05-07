@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DepositController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransactionController;
@@ -35,9 +36,14 @@ Route::middleware('auth')->group(function () {
         Route::get('{transaction}/show', [TransactionController::class, 'show'])->name('show');
         Route::post('{transaction}/refund', [TransactionController::class, 'refund'])->name('refund');
         //Withdraws
-        Route::group(['prefix' => 'withdraw'], function() {
-            Route::get('/', [WithdrawController::class, 'create'])->name('withdraw.create');
-            Route::post('/', [WithdrawController::class, 'store'])->name('withdraw.store');
+        Route::group(['prefix' => 'withdraw', 'as' => 'withdraw.'], function() {
+            Route::get('/', [WithdrawController::class, 'create'])->name('create');
+            Route::post('/', [WithdrawController::class, 'store'])->name('store');
+        });
+        //Deposits
+        Route::group(['prefix' => 'deposit', 'as' => 'deposit.'], function() {
+            Route::get('/', [DepositController::class, 'create'])->name('create');
+            Route::post('/', [DepositController::class, 'store'])->name('store');
         });
     });
 });
