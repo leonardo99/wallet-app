@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\WithdrawController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,7 @@ Route::middleware('auth')->group(function () {
         'prefix' => 'transaction', 
         'as' => 'transaction.'
     ], function () {
+        Route::get('{transctionId}/show', [TransactionController::class, 'show'])->name('show');
         //Withdraws
         Route::group(['prefix' => 'withdraw'], function() {
             Route::get('/', [WithdrawController::class, 'create'])->name('withdraw.create');
