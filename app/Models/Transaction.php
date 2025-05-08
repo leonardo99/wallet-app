@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 use NumberFormatter;
 
@@ -28,16 +29,16 @@ class Transaction extends Model
         });
     }
 
-    public function getDate()
+    public function getDate(): string
     {
         return Carbon::parse($this->created_at)->translatedFormat('j \d\e F - H\hi');
     }
-    public function getHour()
+    public function getHour(): string
     {
         return Carbon::parse($this->created_at)->translatedFormat('H\hi');
     }
 
-    public function getAmount()
+    public function getAmount(): string
     {
         $accountUser = auth()->user()->account->id;
         if($accountUser === $this->sender_account_id) {
@@ -46,9 +47,10 @@ class Transaction extends Model
         if($accountUser === $this->receiver_account_id) {
             return "+ {$this->getAmountFormated()}";
         }
+        return $this->getAmountFormated();
     }
 
-    public function getTypeTransaction()
+    public function getTypeTransaction(): string
     {
         $accountUser = auth()->user()->account->id;
         if($accountUser === $this->sender_account_id) {
@@ -57,9 +59,10 @@ class Transaction extends Model
         if($accountUser === $this->receiver_account_id) {
             return "input";
         }
+        return "desconhecido";
     }
 
-    public function getStatusTransaction()
+    public function getStatusTransaction(): string
     {
         $accountUser = auth()->user()->account->id;
         if($this->status === 'refunded') {
@@ -76,9 +79,10 @@ class Transaction extends Model
                 return "Transferência recebida";
             }
         }
+        return "Status desconhecido";
     }
 
-    public function getBeneficiary()
+    public function getBeneficiary(): string
     {
         $accountUser = auth()->user()->account->id;
         if($this->status === 'refunded') {
@@ -101,20 +105,21 @@ class Transaction extends Model
                 return $this->senderAccount->user->name;
             }
         }
+        return "Desconhecido";
     }
 
-    public function getAmountFormated()
+    public function getAmountFormated(): string
     {
         $formatCurrency = new NumberFormatter('pt_BR', NumberFormatter::CURRENCY);
         return $formatCurrency->formatCurrency($this->amount, 'BRL');
     }
 
-    public function senderAccount()
+    public function senderAccount(): BelongsTo
     {
         return $this->belongsTo(Account::class, 'sender_account_id');
     }
     
-    public function receiverAccount()
+    public function receiverAccount(): BelongsTo
     {
         return $this->belongsTo(Account::class, 'receiver_account_id');
     }

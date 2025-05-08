@@ -6,11 +6,12 @@ use App\Actions\GetTransaction;
 use App\Actions\Refund;
 use App\Models\Transaction;
 use Exception;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class TransactionController extends Controller
 {
-    public function show(Transaction $transaction)
+    public function show(Transaction $transaction): View|RedirectResponse
     {
         try {
             $transaction = GetTransaction::run($transaction);
@@ -20,7 +21,7 @@ class TransactionController extends Controller
         }
     }
 
-    public function refund(Transaction $transaction)
+    public function refund(Transaction $transaction): RedirectResponse
     {
         try {
             $transaction = Refund::run($transaction);

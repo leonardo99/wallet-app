@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 use NumberFormatter;
 
@@ -27,23 +29,23 @@ class Account extends Model
         });
     }
 
-    public function getBalance()
+    public function getBalance(): string
     {
         $formatCurrency = new NumberFormatter('pt_BR', NumberFormatter::CURRENCY);
         return $formatCurrency->formatCurrency($this->balance, 'BRL');
     }
 
-    public function user()
+    public function user(): BelongsTo 
     {
         return $this->belongsTo(User::class);
     }
 
-    public function sentTransactions()
+    public function sentTransactions(): HasMany
     {
         return $this->hasMany(Transaction::class, 'sender_account_id');
     }
 
-    public function receivedTransactions()
+    public function receivedTransactions(): HasMany
     {
         return $this->hasMany(Transaction::class, 'receiver_account_id');
     }
