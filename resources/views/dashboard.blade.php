@@ -5,8 +5,8 @@
         </h2>
     </x-slot>
 
-    <div class="py-8 grid grid-cols-1 gap-2 md:grid-cols-3">
-        <div class="sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto py-8 grid grid-cols-1 gap-2 md:grid-cols-3">
+        <div class="w-full col-span-12 sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <p class="pl-6 pt-6 pb-2 text-gray-600 font-thin text-sm">
                     Saldo em carteira
@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <div class="sm:col-span-2 sm:px-6 lg:px-8">
+        <div class="w-full col-span-12 sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <p class="pl-6 pt-6 pb-2 text-gray-600 font-bold text-base flex gap-1 items-center">
                     <x-bi-cash-coin class="w-5 h-5"/> Transações
@@ -47,7 +47,13 @@
                         </a>
                     </li>  
                     @empty
-                        
+                    <li>
+                        <div class="px-6 py-2 grid grid-cols-12 text-sm items-center">
+                            <span class="col-span-12">
+                                <p>Não há transações</p>
+                            </span> 
+                        </div>
+                    </li>  
                     @endforelse
                 </ul>
                 <div class="border-t border-t-gray-100 px-4 py-4 justify-items-end">
