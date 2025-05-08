@@ -2,12 +2,13 @@
 
 namespace App\Actions;
 
+use App\Models\Transaction;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
 class GetTransaction
 {
-    protected function handle($transaction)
+    protected function handle($transaction): Transaction
     {
         return DB::transaction(function () use($transaction) {
             $accountId = auth()->user()->account->id;
@@ -18,7 +19,7 @@ class GetTransaction
         });
     }
 
-    public static function run($transaction)
+    public static function run($transaction): Transaction
     {
         return (new self())->handle($transaction);
     }
