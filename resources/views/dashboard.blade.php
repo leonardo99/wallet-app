@@ -50,6 +50,9 @@
                         
                     @endforelse
                 </ul>
+                <div class="border-t border-t-gray-100 px-4 py-4 justify-items-end">
+                    {{ $transactions->links() }}
+                </div>
             </div>
         </div>
     </div>
