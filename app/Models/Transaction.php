@@ -63,6 +63,31 @@ class Transaction extends Model
         }
     }
 
+    public function getBeneficiary()
+    {
+        $accountUser = auth()->user()->account->id;
+        if($this->status === 'refunded') {
+            if($accountUser === $this->sender_account_id) {
+                return $this->receiverAccount->user->name;
+            }
+            if($accountUser === $this->receiver_account_id) {
+                return $this->senderAccount->user->name;
+            }
+            return $this->senderAccount->user->name;
+        }
+        if($this->status === 'completed') {
+            if($this->type === 'deposit') {
+                return $this->receiverAccount->user->name;
+            }
+            if($accountUser === $this->sender_account_id) {
+                return $this->receiverAccount->user->name;
+            }
+            if($accountUser === $this->receiver_account_id) {
+                return $this->senderAccount->user->name;
+            }
+        }
+    }
+
     public function getAmountFormated()
     {
         $formatCurrency = new NumberFormatter('pt_BR', NumberFormatter::CURRENCY);

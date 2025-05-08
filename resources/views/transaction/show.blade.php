@@ -25,15 +25,7 @@
                         {{ $transaction->getStatusTransaction() }}
                     </p>
                 </div>
-                <p>
-                    @if ($transaction->getStatusTransaction() === 'enviada')
-                        {{ $transaction->receiverAccount->user->name }}
-                    @elseif($transaction->getStatusTransaction() === 'recebida')
-                        {{ $transaction->senderAccount->user?->name ?? '' }}
-                    @elseif($transaction->getStatusTransaction() === 'devolvida')
-                        {{ $transaction->senderAccount->user?->name ?? '' }}
-                    @endif 
-                </p>
+                <p>{{ $transaction->getBeneficiary() }}</p>
                 @can('update', $transaction)
                     <button id="refund-value" class="p-2 bg-blue-100 hover:bg-blue-200 focus:bg-blue-200 active:bg-blue-200 text-sm text-blue-500 rounded-sm cursor-pointer flex items-center gap-1">
                         <x-bi-arrow-down-circle /> Devolver valor
