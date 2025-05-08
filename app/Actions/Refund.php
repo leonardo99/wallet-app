@@ -2,15 +2,13 @@
 
 namespace App\Actions;
 
-use App\Http\Requests\WithdrawRequest;
-use App\Models\Account;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
 use Exception;
 
 class Refund
 {
-    protected function handle(Transaction $transaction)
+    protected function handle(Transaction $transaction): Transaction
     {
         return DB::transaction(function () use($transaction) {
            $senderAccount = $transaction->senderAccount;
@@ -46,7 +44,7 @@ class Refund
         });
     }
 
-    public static function run(Transaction $transaction)
+    public static function run(Transaction $transaction): Transaction
     {
         return (new self())->handle($transaction);
     }
