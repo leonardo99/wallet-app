@@ -34,6 +34,9 @@
                         @csrf
                     </form>
                 @endcan
+                <div class="border-t border-t-gray-100 px-6 pt-6 flex">
+                    <a href="{{ route('dashboard') }}" class="p-2 bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 active:bg-gray-200 text-sm text-gray-500 rounded-sm cursor-pointer flex items-center gap-1">Voltar</a>
+                </div>
             </div>
         </div>
     </div>

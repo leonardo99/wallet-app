@@ -25,7 +25,8 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="border-t border-t-gray-100 px-6 pt-6 justify-items-end">
+                    <div class="border-t border-t-gray-100 px-6 pt-6 flex justify-between">
+                        <a href="{{ route('dashboard') }}" class="p-2 bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 active:bg-gray-200 text-sm text-gray-500 rounded-sm cursor-pointer flex items-center gap-1">Voltar</a>
                         <button class="p-2 bg-blue-100 hover:bg-blue-200 focus:bg-blue-200 active:bg-blue-200 text-sm text-blue-500 rounded-sm cursor-pointer flex items-center gap-1"><x-bi-arrow-up-circle /> Depositar</button>
                     </div>
                 </form>
