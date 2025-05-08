@@ -32,6 +32,10 @@ class Transaction extends Model
     {
         return Carbon::parse($this->created_at)->translatedFormat('j \d\e F - H\hi');
     }
+    public function getHour()
+    {
+        return Carbon::parse($this->created_at)->translatedFormat('H\hi');
+    }
 
     public function getAmount()
     {
@@ -41,6 +45,17 @@ class Transaction extends Model
         }
         if($accountUser === $this->receiver_account_id) {
             return "+ {$this->getAmountFormated()}";
+        }
+    }
+
+    public function getTypeTransaction()
+    {
+        $accountUser = auth()->user()->account->id;
+        if($accountUser === $this->sender_account_id) {
+            return "output";
+        }
+        if($accountUser === $this->receiver_account_id) {
+            return "input";
         }
     }
 
