@@ -9,7 +9,7 @@ use Exception;
 
 class GenerateAccount
 {
-    protected function handle(User $user)
+    protected function handle(User $user): User
     {
         return DB::transaction(function () use($user) {
             $account = new Account(['balance' => 0.00]);
@@ -21,7 +21,7 @@ class GenerateAccount
         });
     }
 
-    public static function run(User $user)
+    public static function run(User $user): User
     {
         return (new self())->handle($user);
     }

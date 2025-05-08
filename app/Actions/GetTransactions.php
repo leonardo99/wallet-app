@@ -3,11 +3,12 @@
 namespace App\Actions;
 
 use App\Models\Transaction;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
 class GetTransactions
 {
-    protected function handle(): Transaction
+    protected function handle(): LengthAwarePaginator
     {
         return DB::transaction(function () {
             $account = auth()->user()->account->id;
@@ -20,7 +21,7 @@ class GetTransactions
         });
     }
 
-    public static function run(): Transaction
+    public static function run(): LengthAwarePaginator
     {
         return (new self())->handle();
     }
