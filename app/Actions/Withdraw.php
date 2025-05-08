@@ -2,7 +2,6 @@
 
 namespace App\Actions;
 
-use App\Http\Requests\WithdrawRequest;
 use App\Models\Account;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
@@ -10,7 +9,7 @@ use Exception;
 
 class Withdraw
 {
-    protected function handle(array $data)
+    protected function handle(array $data): Transaction
     {
         return DB::transaction(function () use($data) {
            $senderAccount = auth()->user()->account()->lockForUpdate()->first();
@@ -43,7 +42,7 @@ class Withdraw
         });
     }
 
-    public static function run(array $data)
+    public static function run(array $data): Transaction
     {
         return (new self())->handle($data);
     }
