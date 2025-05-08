@@ -57,7 +57,7 @@ Antes de iniciar, você precisará ter os seguintes softwares instalados:
    ```bash
    npm run dev
 
-## ⚙️ Instalação
+## 🧪 Testes
 
 Para executar os testes:
  ```bash
