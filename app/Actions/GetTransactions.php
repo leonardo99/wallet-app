@@ -16,7 +16,7 @@ class GetTransactions
                                         ->where('reversed_transaction_id', null)
                                         ->orWhere('receiver_account_id', $account)
                                         ->latest()
-                                        ->paginate();
+                                        ->paginate(5);
             return $transactions;
         });
     }
