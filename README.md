@@ -46,14 +46,9 @@ Antes de iniciar, você precisará ter os seguintes softwares instalados:
 
 6. php artisan migrate
    ```bash
-   cp .env.example .env
-   php artisan key:generate
-
-7. php artisan migrate
-   ```bash
    php artisan serve
 
-8. Compile os assets:
+7. Compile os assets:
    ```bash
    npm run dev
 
