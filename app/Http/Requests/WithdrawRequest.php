@@ -23,7 +23,7 @@ class WithdrawRequest extends FormRequest
     {
         return [
             'id' => 'required|uuid|exists:accounts,id|min:36|max:36',
-            'amount' => ['required' , 'numeric', 'regex:/^\d{1,13}(\.\d{1,2})?$/'], 
+            'amount' => ['required' , 'numeric', 'regex:/^\d{1,13}(\.\d{1,2})?$/', 'min:0.01'], 
         ];
     }
 
