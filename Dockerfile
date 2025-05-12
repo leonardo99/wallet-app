@@ -26,7 +26,6 @@ COPY . .
 
 # Copia os arquivos compilados do Vite
 COPY --from=node-builder /app/public/build /var/www/public/build
-COPY --from=node-builder /app/public/mix-manifest.json /var/www/public/mix-manifest.json
 COPY --from=node-builder /app/public/build/manifest.json /var/www/public/build/manifest.json
 
 # Instala dependências do Laravel
