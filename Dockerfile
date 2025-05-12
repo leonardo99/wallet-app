@@ -3,6 +3,7 @@ FROM php:8.1-fpm
 # Instala dependências básicas
 RUN apt-get update && apt-get install -y \
     libzip-dev unzip curl git zip libpng-dev libonig-dev libxml2-dev \
+    netcat \
     && docker-php-ext-install pdo pdo_mysql mbstring zip exif pcntl bcmath
 
 # Instala Composer
