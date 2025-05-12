@@ -1,13 +1,13 @@
 FROM node:18 AS node-builder
 
-WORKDIR /app
+FROM node:18 AS node
+WORKDIR /var/www
 
+# Copia arquivos do frontend
 COPY package*.json vite.config.js ./
 COPY resources ./resources
 
-RUN npm install && npm run build
-
-COPY . .
+RUN npm install
 RUN npm run build
 
 FROM php:8.1-fpm
@@ -26,9 +26,9 @@ WORKDIR /var/www
 # Copia os arquivos da aplicação
 COPY . .
 
-# # Copia os arquivos compilados do Vite
-COPY --from=node-builder /app/public/build ./public/build
-# COPY --from=node-builder /app/public/build/manifest.json /var/www/public/build/manifest.json
+# Copia os arquivos de build do frontend gerados pelo estágio anterior
+COPY --from=node /var/www/public/build ./public/build
+COPY --from=node /var/www/resources ./resources
 
 # Instala dependências do Laravel
 RUN composer install --no-dev --optimize-autoloader --no-interaction
