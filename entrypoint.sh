@@ -13,7 +13,7 @@ echo "Banco de dados está acessível!"
 # Executa as migrations
 php artisan migrate --force
 
-php artisan optimize:clear
+php artisan config:cache
 
 # Inicia o servidor Laravel (ajuste conforme seu caso)
 php artisan serve --host=0.0.0.0 --port=8000
