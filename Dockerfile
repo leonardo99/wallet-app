@@ -1,3 +1,13 @@
+FROM node:18 AS node-builder
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+RUN npm run build
+
 FROM php:8.1-fpm
 
 # Instala dependências básicas
@@ -13,6 +23,11 @@ WORKDIR /var/www
 
 # Copia os arquivos da aplicação
 COPY . .
+
+# Copia os arquivos compilados do Vite
+COPY --from=node-builder /app/public/build /var/www/public/build
+COPY --from=node-builder /app/public/mix-manifest.json /var/www/public/mix-manifest.json
+COPY --from=node-builder /app/public/build/manifest.json /var/www/public/build/manifest.json
 
 # Instala dependências do Laravel
 RUN composer install --no-dev --optimize-autoloader --no-interaction
