@@ -1,13 +1,10 @@
-FROM node:18 AS node-builder
-
 FROM node:18 AS node
+
 WORKDIR /var/www
 
-RUN ls
-
-# Copia arquivos do frontend
 COPY package*.json vite.config.js ./
 COPY resources ./resources
+COPY public ./public
 
 RUN npm install
 RUN npm run build
@@ -29,8 +26,8 @@ WORKDIR /var/www
 COPY . .
 
 # Copia os arquivos de build do frontend gerados pelo estágio anterior
-# COPY --from=node /var/www/public/build /var/www/public/build
-# COPY --from=node /var/www/resources ./resources
+COPY --from=node /var/www/public/build ./public/build
+COPY --from=node /var/www/public/manifest.json ./public/manifest.json
 
 # Instala dependências do Laravel
 RUN composer install --no-dev --optimize-autoloader --no-interaction
