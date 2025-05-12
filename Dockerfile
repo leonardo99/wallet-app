@@ -19,8 +19,6 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction
 # Ajusta permissões
 RUN chown -R www-data:www-data /var/www && chmod -R 755 /var/www
 
-RUN php artisan migrate
-
 EXPOSE 8000
 
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
