@@ -27,8 +27,8 @@ WORKDIR /var/www
 COPY . .
 
 # Copia os arquivos de build do frontend gerados pelo estágio anterior
-COPY --from=node /var/www/public/build ./public/build
-COPY --from=node /var/www/resources ./resources
+COPY --from=node /var/www/public/build /var/www/public/build
+# COPY --from=node /var/www/resources ./resources
 
 # Instala dependências do Laravel
 RUN composer install --no-dev --optimize-autoloader --no-interaction
