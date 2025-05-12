@@ -1,12 +1,14 @@
-# FROM node:18 AS node-builder
+FROM node:18 AS node-builder
 
-# WORKDIR /app
+WORKDIR /app
 
-# COPY package*.json ./
-# RUN npm install
+COPY package*.json vite.config.js ./
+COPY resources ./resources
 
-# COPY . .
-# RUN npm run build
+RUN npm install && npm run build
+
+COPY . .
+RUN npm run build
 
 FROM php:8.1-fpm
 
@@ -25,7 +27,7 @@ WORKDIR /var/www
 COPY . .
 
 # # Copia os arquivos compilados do Vite
-# COPY --from=node-builder /app/public/build /var/www/public/build
+COPY --from=node-builder /app/public/build ./public/build
 # COPY --from=node-builder /app/public/build/manifest.json /var/www/public/build/manifest.json
 
 # Instala dependências do Laravel
