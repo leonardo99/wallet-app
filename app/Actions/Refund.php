@@ -24,7 +24,7 @@ class Refund
             }
             $senderAccount->balance += $transaction->amount;
             $receiverAccount->balance -= $transaction->amount;
-            $transaction->status = 'refunded';
+            // $transaction->status = 'refunded';
             $senderAccount->save();
             $receiverAccount->save();
             $transaction->save();
